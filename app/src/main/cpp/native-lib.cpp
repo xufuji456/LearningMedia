@@ -15,7 +15,7 @@ extern "C" {
 #define LOGI(FMT,...) __android_log_print(ANDROID_LOG_INFO, "NdkHelper", FMT, __VA_ARGS__)
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_ndklearning_NdkHelper_stringFromJNI(
+Java_com_example_ndklearning_MediaJniHelper_stringFromJNI(
         JNIEnv* env,
         jobject /* this */) {
     std::string hello = "welcome to the world of ndk";
@@ -31,7 +31,7 @@ Java_com_example_ndklearning_NdkHelper_stringFromJNI(
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_ndklearning_NdkHelper_setIntData(JNIEnv *env, jobject thiz, jintArray jdata) {
+Java_com_example_ndklearning_MediaJniHelper_setIntData(JNIEnv *env, jobject thiz, jintArray jdata) {
 //    jint *data = env->GetIntArrayElements(jdata, JNI_FALSE);
     int len = env->GetArrayLength(jdata);
 //    jint *data = new int[len];
@@ -46,8 +46,8 @@ Java_com_example_ndklearning_NdkHelper_setIntData(JNIEnv *env, jobject thiz, jin
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_ndklearning_NdkHelper_testReflect(JNIEnv *env, jobject thiz) {
-    jclass clazz = env->FindClass("com/example/ndklearning/NdkHelper");
+Java_com_example_ndklearning_MediaJniHelper_testReflect(JNIEnv *env, jobject thiz) {
+    jclass clazz = env->FindClass("com/example/ndklearning/MediaJniHelper");
     jmethodID method = env->GetMethodID(clazz, "onJniCallback", "(Ljava/lang/String;)V");
     env->CallVoidMethod(thiz, method, env->NewStringUTF("callback from JNI..."));
 }

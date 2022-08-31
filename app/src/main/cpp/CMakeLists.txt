@@ -18,7 +18,7 @@ include_directories(include)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SRC_LIST)
 
 add_library( # Sets the name of the library.
-        ndklearning
+        like_media
 
         # Sets the library as a shared library.
         SHARED
@@ -46,6 +46,6 @@ find_library(log-lib log)
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-        ndklearning
+        like_media
         ffmpeg
         ${log-lib})

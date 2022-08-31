@@ -7,10 +7,10 @@ import android.util.Log;
  * @date 2022/8/14 6:31 下午
  * @desc
  */
-public class NdkHelper {
+public class MediaJniHelper {
 
     static {
-        System.loadLibrary("ndklearning");
+        System.loadLibrary("like_media");
     }
 
     public native String stringFromJNI();
@@ -21,7 +21,7 @@ public class NdkHelper {
 
     void onJniCallback(String msg) {
         if (msg != null) {
-            Log.i("NdkHelper", msg);
+            Log.i("MediaJniHelper", msg);
         }
     }
 
