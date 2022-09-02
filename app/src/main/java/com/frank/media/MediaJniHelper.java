@@ -1,4 +1,4 @@
-package com.example.ndklearning;
+package com.frank.media;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.example.ndklearning;
+package com.frank.media;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,19 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.ndklearning.databinding.ActivityMainBinding;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        // Example of a call to a native method
-        TextView tv = binding.sampleText;
+        TextView tv = findViewById(R.id.sample_text);
         MediaJniHelper jniHelper = new MediaJniHelper();
         String strFromJni = jniHelper.stringFromJNI();
         tv.setText(strFromJni);
