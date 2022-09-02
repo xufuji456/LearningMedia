@@ -2,6 +2,8 @@ package com.frank.media;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,11 +12,17 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, 54321);
+        }
 
         TextView tv = findViewById(R.id.sample_text);
         MediaJniHelper jniHelper = new MediaJniHelper();
