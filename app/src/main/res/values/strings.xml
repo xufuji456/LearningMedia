@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LearningMedia</string>
+    <string name="str_record">record</string>
+    <string name="str_play">play</string>
 </resources>

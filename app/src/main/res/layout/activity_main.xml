@@ -14,13 +14,21 @@
         android:layout_centerInParent="true" />
 
     <Button
-        android:id="@+id/btn_reflect"
+        android:id="@+id/btn_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sample_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp"
-        android:text="callJava"/>
+        android:text="@string/str_record"/>
 
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_record"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:text="@string/str_play"/>
 
 </RelativeLayout>
