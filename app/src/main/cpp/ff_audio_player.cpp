@@ -46,14 +46,14 @@ int FFAudioPlayer::open(const char *path) {
         LOGE(AUDIO_TAG, "avcodec_open2 error=%s", av_err2str(ret));
         return ret;
     }
-    // 输入：采样率、声道布局、音频格式
+    // 输入输出参数：采样率、声道布局、音频格式
     int in_sample_rate = codecContext->sample_rate;
     auto in_sample_fmt = codecContext->sample_fmt;
-    int in_ch_layout = codecContext->ch_layout.u.mask; // codecContext->channel_layout
-    out_sample_rate = in_sample_rate; // 输出采样率等于输入采样率
-    out_sample_fmt = AV_SAMPLE_FMT_S16; // 16位
-    out_ch_layout = AV_CH_LAYOUT_STEREO; // 双声道
-    out_channel = codecContext->ch_layout.nb_channels; // codecContext->channels
+    int in_ch_layout   = codecContext->ch_layout.u.mask; // codecContext->channel_layout
+    out_sample_rate    = in_sample_rate; // 输出采样率等于输入采样率
+    out_sample_fmt     = AV_SAMPLE_FMT_S16; // 16位
+    out_ch_layout      = AV_CH_LAYOUT_STEREO; // 双声道
+    out_channel        = codecContext->ch_layout.nb_channels; // codecContext->channels
     // 初始化音频格式转换上下文swrContext
     swrContext = swr_alloc();
     swr_alloc_set_opts(swrContext, out_ch_layout, out_sample_fmt, out_sample_rate,
@@ -77,7 +77,7 @@ int FFAudioPlayer::decodeAudio() {
     if (ret < 0) {
         return ret;
     }
-    // 判断是否位音频帧
+    // 判断是否为音频帧
     if (packet->stream_index != audio_index) {
         return 0;
     }

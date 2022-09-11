@@ -31,7 +31,7 @@ Java_com_frank_media_MediaJniHelper_playAudio(JNIEnv* env, jobject thiz, jstring
     // 获取write方法id
     jmethodID write_method = env->GetMethodID(audio_track_class, "write", "([BII)I");
 
-    // 解码音频zhen
+    // 解码音频帧
     while (result >= 0) {
         result = audioPlayer->decodeAudio();
         if (result == 0) {
