@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sample_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="10dp"
         android:text="@string/str_record"/>
 
     <Button
@@ -28,7 +28,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_record"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="10dp"
         android:text="@string/str_play"/>
+
+    <Button
+        android:id="@+id/btn_resample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_record"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/str_resample"/>
 
 </RelativeLayout>

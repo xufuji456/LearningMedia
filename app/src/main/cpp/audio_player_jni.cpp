@@ -4,7 +4,6 @@
 
 #include "ff_audio_player.h"
 #include <jni.h>
-#include <jni.h>
 #include <unistd.h>
 
 #define SLEEP_TIME (16000)

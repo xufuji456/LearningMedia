@@ -61,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
                 }).start();
             }
         });
+
+        Button btnResample = findViewById(R.id.btn_resample);
+        btnResample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MediaJniHelper mediaJniHelper = new MediaJniHelper();
+                        String path = Environment.getExternalStorageDirectory().getPath() + "/hello.m4a";
+                        String output = Environment.getExternalStorageDirectory().getPath() + "/16000.m4a";
+                        mediaJniHelper.audioResample(path, output, 16000);
+                    }
+                }).start();
+            }
+        });
     }
 
 }

@@ -22,6 +22,8 @@ public class MediaJniHelper {
 
     public native void testReflect();
 
+    public native void audioResample(String inputPath, String outputPath, int sampleRate);
+
     void onJniCallback(String msg) {
         if (msg != null) {
             Log.i("MediaJniHelper", msg);
