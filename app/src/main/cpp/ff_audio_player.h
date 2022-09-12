@@ -11,6 +11,9 @@ extern "C" {
 #include "libavformat/avformat.h"
 #include "libavcodec/avcodec.h"
 #include "libswresample/swresample.h"
+#include "libavfilter/buffersrc.h"
+#include "libavfilter/buffersink.h"
+#include "libavfilter/avfilter.h"
 #ifdef __cplusplus
 }
 #endif
@@ -28,7 +31,17 @@ private:
     enum AVSampleFormat out_sample_fmt;
     AVPacket *packet;
     AVFrame *frame;
+    AVFrame *filterFrame;
     uint8_t *out_buffer;
+
+    AVFilterGraph *filterGraph;
+    AVFilterContext *srcContext;
+    AVFilterContext *sinkContext;
+
+    // 滤波描述
+    const char *filterDesc;
+    bool filterAgain = false;
+    bool exitPlaying = false;
 
 public:
     int open(const char* path);
@@ -38,6 +51,10 @@ public:
     int getChannel() const;
 
     int decodeAudio();
+
+    void setFilterAgain(const char *filter);
+
+    void setExitPlaying(bool exit);
 
     uint8_t *getDecodeFrame() const;
 

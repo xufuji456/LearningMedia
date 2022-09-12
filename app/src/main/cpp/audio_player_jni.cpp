@@ -9,13 +9,20 @@
 #define SLEEP_TIME (16000)
 
 extern "C"
+JNIEXPORT long JNICALL
+Java_com_frank_media_MediaJniHelper_native_1init(JNIEnv* env, jobject thiz) {
+    FFAudioPlayer *audioPlayer = new FFAudioPlayer();
+    return (long) audioPlayer;
+}
+
+extern "C"
 JNIEXPORT void JNICALL
-Java_com_frank_media_MediaJniHelper_playAudio(JNIEnv* env, jobject thiz, jstring path) {
+Java_com_frank_media_MediaJniHelper_play_1audio(JNIEnv* env, jobject thiz, long context, jstring path) {
     if (path == nullptr)
         return;
     const char* native_path = env->GetStringUTFChars(path, JNI_FALSE);
     int result = 0;
-    FFAudioPlayer *audioPlayer = new FFAudioPlayer();
+    FFAudioPlayer *audioPlayer = (FFAudioPlayer *) context;
     // 打开输入流
     audioPlayer->open(native_path);
     // 初始化AudioTrack
@@ -56,4 +63,27 @@ Java_com_frank_media_MediaJniHelper_playAudio(JNIEnv* env, jobject thiz, jstring
     env->CallVoidMethod(thiz, release_method);
     audioPlayer->close();
     delete audioPlayer;
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_frank_media_MediaJniHelper_filter_1again(JNIEnv* env, jobject thiz, long context, jstring filter) {
+    if (context == 0)
+        return;
+    FFAudioPlayer *audioPlayer = (FFAudioPlayer *) context;
+    if (!audioPlayer)
+        return;
+    const char *filter_desc = env->GetStringUTFChars(filter, JNI_FALSE);
+    audioPlayer->setFilterAgain(filter_desc);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_frank_media_MediaJniHelper_native_1release(JNIEnv* env, jobject thiz, long context) {
+    if (context == 0)
+        return;
+    FFAudioPlayer *audioPlayer = (FFAudioPlayer *) context;
+    if (!audioPlayer)
+        return;
+    audioPlayer->setExitPlaying(true);
 }

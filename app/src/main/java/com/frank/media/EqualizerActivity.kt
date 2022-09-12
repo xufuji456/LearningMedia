@@ -67,7 +67,8 @@ class EqualizerActivity : AppCompatActivity(), OnSeeBarListener {
         if (filterThread == null) {
             val filter = "superequalizer=6b=4:8b=5:10b=5"
             filterThread = Thread(Runnable {
-//                mAudioPlayer!!.playAudio(audioPath, filter)
+                mAudioPlayer!!.init()
+                mAudioPlayer!!.playAudio(audioPath)
             })
             filterThread!!.start()
         } else {
@@ -82,7 +83,7 @@ class EqualizerActivity : AppCompatActivity(), OnSeeBarListener {
             }
             builder.deleteCharAt(builder.length - 1)
             Log.e("Equalizer", "update filter=$builder")
-//            mAudioPlayer!!.again(builder.toString())
+            mAudioPlayer!!.filterAgain(builder.toString())
         }
     }
 
@@ -93,7 +94,7 @@ class EqualizerActivity : AppCompatActivity(), OnSeeBarListener {
     override fun onDestroy() {
         super.onDestroy()
         if (filterThread != null) {
-//            mAudioPlayer!!.release()
+            mAudioPlayer!!.release()
             filterThread?.interrupt()
             filterThread = null
         }

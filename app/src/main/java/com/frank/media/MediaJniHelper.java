@@ -16,6 +16,8 @@ public class MediaJniHelper {
         System.loadLibrary("like_media");
     }
 
+    private long audioContext;
+
     public native String stringFromJNI();
 
     public native void setIntData(int[] data);
@@ -32,7 +34,33 @@ public class MediaJniHelper {
 
     private AudioTrack audioTrack;
 
-    public native void playAudio(String path);
+    private native long native_init();
+
+    private native void play_audio(long context, String path);
+
+    private native void filter_again(long context, String filterDesc);
+
+    private native void native_release(long context);
+
+    public void init() {
+        audioContext = native_init();
+    }
+
+    public void playAudio(String path) {
+        play_audio(audioContext, path);
+    }
+
+    public void filterAgain(String filterDesc) {
+        filter_again(audioContext, filterDesc);
+    }
+
+    public void release() {
+        if (audioContext == 0)
+            return;
+
+        native_release(audioContext);
+        audioContext = 0;
+    }
 
     // 用于native反射创建
     public AudioTrack createAudioTrack(int sampleRate, int channel) {

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void run() {
                         MediaJniHelper mediaJniHelper = new MediaJniHelper();
                         String path = Environment.getExternalStorageDirectory().getPath() + "/tiger.mp3";
+                        mediaJniHelper.init();
                         mediaJniHelper.playAudio(path);
                     }
                 }).start();
