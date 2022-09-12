@@ -3,4 +3,6 @@
     <string name="str_record">record</string>
     <string name="str_play">play</string>
     <string name="str_resample">resample</string>
+    <string name="str_equalizer">equalizer</string>
+    <string name="audio_equalizer">均衡器</string>
 </resources>

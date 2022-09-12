@@ -3,16 +3,16 @@ package com.frank.media;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.RECORD_AUDIO};
@@ -30,10 +30,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Button btnRecord = findViewById(R.id.btn_record);
-        btnRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnRecord.setOnClickListener(this);
 
+        Button btnPlay = findViewById(R.id.btn_play);
+        btnPlay.setOnClickListener(this);
+
+        Button btnResample = findViewById(R.id.btn_resample);
+        btnResample.setOnClickListener(this);
+
+        Button btnEqualizer = findViewById(R.id.btn_equalizer);
+        btnEqualizer.setOnClickListener(this);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_record:
                 if (simpleAudioRecord == null) {
                     simpleAudioRecord = new SimpleAudioRecord();
                     // 注意Android10以上，分区存储需要另外的处理
@@ -44,13 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     simpleAudioRecord.stopRecord();
                     Log.e("Main", "stop record...");
                 }
-            }
-        });
-
-        Button btnPlay = findViewById(R.id.btn_play);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btn_play:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -59,13 +67,8 @@ public class MainActivity extends AppCompatActivity {
                         mediaJniHelper.playAudio(path);
                     }
                 }).start();
-            }
-        });
-
-        Button btnResample = findViewById(R.id.btn_resample);
-        btnResample.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btn_resample:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -75,8 +78,14 @@ public class MainActivity extends AppCompatActivity {
                         mediaJniHelper.audioResample(path, output, 16000);
                     }
                 }).start();
-            }
-        });
+                break;
+            case R.id.btn_equalizer:
+                Intent equalizerIntent = new Intent(MainActivity.this, EqualizerActivity.class);
+                startActivity(equalizerIntent);
+                break;
+            default:
+                break;
+        }
     }
 
 }
