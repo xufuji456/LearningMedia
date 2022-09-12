@@ -5,4 +5,11 @@
     <string name="str_resample">resample</string>
     <string name="str_equalizer">equalizer</string>
     <string name="audio_equalizer">均衡器</string>
+    <string name="audio_effect">音效</string>
+    <string name="audio_effect_echo">空灵</string>
+    <string name="audio_effect_funny">搞笑</string>
+    <string name="audio_effect_tremolo">惊悚</string>
+    <string name="audio_effect_lolita">萝莉</string>
+    <string name="audio_effect_uncle">大叔</string>
+
 </resources>

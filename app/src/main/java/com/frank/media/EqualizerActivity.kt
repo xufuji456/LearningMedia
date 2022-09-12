@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.util.Pair
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +44,65 @@ class EqualizerActivity : AppCompatActivity(), OnSeeBarListener {
         equalizerView.layoutManager = layoutManager
         equalizerAdapter = EqualizerAdapter(this, this)
         equalizerView.adapter = equalizerAdapter
+
+        val effectEcho    = findViewById<RadioButton>(R.id.btn_effect_echo)
+        val effectFunny   = findViewById<RadioButton>(R.id.btn_effect_funny)
+        val effectTremolo = findViewById<RadioButton>(R.id.btn_effect_tremolo)
+        val effectLolita  = findViewById<RadioButton>(R.id.btn_effect_lolita)
+        val effectUncle   = findViewById<RadioButton>(R.id.btn_effect_uncle)
+        val effectGroup   = findViewById<RadioGroup>(R.id.group_audio_effect)
+
+        effectGroup.setOnCheckedChangeListener { group, checkId ->
+            when (checkId) {
+                effectEcho.id -> { // 空灵
+                    doAudioEffect(0)
+                    Log.e("EqualizerActivity", "effect:空灵")
+                }
+                effectFunny.id -> { // 搞笑
+                    doAudioEffect(1)
+                    Log.e("EqualizerActivity", "effect:搞笑")
+                }
+                effectTremolo.id -> { // 惊悚
+                    doAudioEffect(2)
+                    Log.e("EqualizerActivity", "effect:惊悚")
+                }
+                effectLolita.id -> { // 萝莉
+                    doAudioEffect(3)
+                    Log.e("EqualizerActivity", "effect:萝莉")
+                }
+                effectUncle.id -> { // 大叔
+                    doAudioEffect(4)
+                    Log.e("EqualizerActivity", "effect:大叔")
+                }
+            }
+        }
+    }
+
+    private fun getAudioEffect(index :Int) :String {
+        return when(index) {
+            0 -> "aecho=0.8:0.9:1000:0.5"
+            1 -> "atempo=2"
+            2 -> "tremolo=5:0.9"
+            3 -> "asetrate=44100*1.4,aresample=44100,atempo=1/1.4"
+            4 -> "asetrate=44100*0.6,aresample=44100,atempo=1/0.6"
+            else -> ""
+        }
+    }
+
+    private fun doAudioEffect(index :Int) {
+        var effect = getAudioEffect(index)
+        if (effect.isEmpty())
+            return
+        val filter = ",superequalizer=8b=5"
+        effect += filter
+        if (filterThread == null) {
+            filterThread = Thread(Runnable {
+                mAudioPlayer!!.playAudio(audioPath)
+            })
+            filterThread!!.start()
+        } else {
+            mAudioPlayer!!.filterAgain(effect)
+        }
     }
 
     private fun setupEqualizer() {
