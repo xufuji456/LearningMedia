@@ -3,7 +3,7 @@
 //
 
 #include <jni.h>
-#include "ff_audio_resampler.h"
+#include "ff_audio_resample.h"
 
 extern "C"
 JNIEXPORT void JNICALL

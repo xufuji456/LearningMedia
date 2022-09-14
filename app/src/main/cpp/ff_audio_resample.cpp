@@ -2,7 +2,7 @@
 // Created by xu fulong on 2022/9/11.
 //
 
-#include "ff_audio_resampler.h"
+#include "ff_audio_resample.h"
 
 #define RESAMPLE_TAG "AudioResample"
 
