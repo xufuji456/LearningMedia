@@ -15,7 +15,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.RECORD_AUDIO};
+        Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
 
     private SimpleAudioRecord simpleAudioRecord;
 
