@@ -1,4 +1,4 @@
-package com.frank.media.live.stream;
+package com.frank.living.stream;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,10 +11,10 @@ import android.view.SurfaceHolder;
 import android.view.TextureView;
 import android.view.View;
 
-import com.frank.media.live.camera.Camera2Helper;
-import com.frank.media.live.camera.Camera2Listener;
-import com.frank.media.live.listener.OnFrameDataCallback;
-import com.frank.media.live.param.VideoParam;
+import com.frank.living.camera.Camera2Helper;
+import com.frank.living.camera.Camera2Listener;
+import com.frank.living.listener.OnFrameDataCallback;
+import com.frank.living.param.VideoParam;
 
 public class VideoChannelStream extends VideoStreamBase
         implements TextureView.SurfaceTextureListener, Camera2Listener {

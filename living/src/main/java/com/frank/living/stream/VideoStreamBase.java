@@ -1,4 +1,4 @@
-package com.frank.media.live.stream;
+package com.frank.living.stream;
 
 import android.view.SurfaceHolder;
 

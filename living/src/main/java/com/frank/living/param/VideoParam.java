@@ -1,4 +1,4 @@
-package com.frank.media.live.param;
+package com.frank.living.param;
 
 public class VideoParam {
     private int width;

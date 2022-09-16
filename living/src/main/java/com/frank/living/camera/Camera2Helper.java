@@ -1,4 +1,4 @@
-package com.frank.media.live.camera;
+package com.frank.living.camera;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -28,7 +28,7 @@ import android.view.TextureView;
 
 import androidx.annotation.NonNull;
 
-import com.frank.media.live.util.YUVUtil;
+import com.frank.living.util.YUVUtil;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

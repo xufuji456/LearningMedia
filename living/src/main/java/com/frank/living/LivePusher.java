@@ -1,18 +1,17 @@
-package com.frank.media.live;
+package com.frank.living;
 
 import android.app.Activity;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 
-import com.frank.media.R;
-import com.frank.media.live.listener.LiveStateChangeListener;
-import com.frank.media.live.listener.OnFrameDataCallback;
-import com.frank.media.live.param.AudioParam;
-import com.frank.media.live.param.VideoParam;
-import com.frank.media.live.stream.AudioChannelStream;
-import com.frank.media.live.stream.VideoStreamBase;
-import com.frank.media.live.stream.VideoChannelStream;
+import com.frank.living.listener.LiveStateChangeListener;
+import com.frank.living.listener.OnFrameDataCallback;
+import com.frank.living.param.AudioParam;
+import com.frank.living.param.VideoParam;
+import com.frank.living.stream.AudioChannelStream;
+import com.frank.living.stream.VideoStreamBase;
+import com.frank.living.stream.VideoChannelStream;
 
 public class LivePusher implements OnFrameDataCallback {
 

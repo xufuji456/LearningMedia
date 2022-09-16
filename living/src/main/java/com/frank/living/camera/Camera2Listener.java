@@ -1,4 +1,4 @@
-package com.frank.media.live.camera;
+package com.frank.living.camera;
 
 
 import android.util.Size;

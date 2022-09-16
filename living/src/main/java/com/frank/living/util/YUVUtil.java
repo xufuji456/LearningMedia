@@ -1,4 +1,4 @@
-package com.frank.media.live.util;
+package com.frank.living.util;
 
 public class YUVUtil {
 

@@ -1,4 +1,4 @@
-package com.frank.media.live.stream;
+package com.frank.living.stream;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.media.MediaRecorder;
 
 import androidx.core.app.ActivityCompat;
 
-import com.frank.media.live.listener.OnFrameDataCallback;
-import com.frank.media.live.param.AudioParam;
+import com.frank.living.listener.OnFrameDataCallback;
+import com.frank.living.param.AudioParam;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

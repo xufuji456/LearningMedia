@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">living</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="error_video_encoder">打开视频编码器失败</string>
+    <string name="error_video_encode">视频编码失败</string>
+    <string name="error_audio_encoder">打开音频编码器失败</string>
+    <string name="error_audio_encode">音频编码失败</string>
+    <string name="error_rtmp_connect">RTMP连接服务器失败</string>
+    <string name="error_rtmp_connect_strem">RTMP连接流失败</string>
+    <string name="error_rtmp_send_packet">RTMP发送数据包失败</string>
+</resources>
