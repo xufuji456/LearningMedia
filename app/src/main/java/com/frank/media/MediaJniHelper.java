@@ -79,4 +79,10 @@ public class MediaJniHelper {
         }
     }
 
+    private native int push(String inputPath, String outputPath);
+
+    public int pushStream(String inputPath, String outputPath) {
+        return push(inputPath, outputPath);
+    }
+
 }

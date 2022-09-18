@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btnEqualizer = findViewById(R.id.btn_equalizer);
         btnEqualizer.setOnClickListener(this);
+
+        Button btnFFmpegPush = findViewById(R.id.btn_ffmpeg_push);
+        btnFFmpegPush.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_equalizer:
                 Intent equalizerIntent = new Intent(MainActivity.this, EqualizerActivity.class);
                 startActivity(equalizerIntent);
+                break;
+            case R.id.btn_ffmpeg_push:
+                String inputPath = "sdcard/beyond.mp4";
+                String outputPath = "rtmp://192.168.31.129/live/stream";
+                MediaJniHelper mediaJniHelper = new MediaJniHelper();
+                mediaJniHelper.pushStream(inputPath, outputPath);
                 break;
             default:
                 break;
