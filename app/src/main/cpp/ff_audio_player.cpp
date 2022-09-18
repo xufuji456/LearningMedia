@@ -231,6 +231,12 @@ void FFAudioPlayer::close() {
     if (filterFrame) {
         av_frame_free(&filterFrame);
     }
+    if (srcContext) {
+        avfilter_free(srcContext);
+    }
+    if (sinkContext) {
+        avfilter_free(sinkContext);
+    }
     if (filterGraph) {
         avfilter_graph_free(&filterGraph);
     }

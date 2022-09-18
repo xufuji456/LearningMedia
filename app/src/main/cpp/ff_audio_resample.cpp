@@ -200,7 +200,7 @@ int FFAudioResample::decodeAndConvert(int *finished) {
             LOGE(RESAMPLE_TAG, "resample error=%s", av_err2str(ret));
             goto end;
         }
-        av_audio_fifo_write(resample->fifo, (void **)dst_samples, dst_nb_samples);
+        av_audio_fifo_write(resample->fifo, (void **)dst_samples, ret);
     }
     ret = 0;
 end:
