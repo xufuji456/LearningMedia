@@ -17,4 +17,8 @@
     <string name="error_rtmp_connect">RTMP连接服务器失败</string>
     <string name="error_rtmp_connect_strem">RTMP连接流失败</string>
     <string name="error_rtmp_send_packet">RTMP发送数据包失败</string>
+
+    <string name="start_push">开始推流</string>
+    <string name="stop_push">结束推流</string>
+
 </resources>
