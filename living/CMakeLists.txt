@@ -24,13 +24,13 @@ set_target_properties(x264
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-include_directories(main/cpp/include)
+include_directories(src/main/cpp/include)
+
+aux_source_directory(src/main/cpp SRC_LIST)
 
 add_library(live
         SHARED
-        src/main/cpp/AudioStream.cpp
-        src/main/cpp/VideoStream.cpp
-        src/main/cpp/RtmpPusher.cpp)
+        ${SRC_LIST})
 
 find_library( log-lib
               log )
