@@ -104,9 +104,14 @@ void VideoStream::sendSpsPps(uint8_t *sps, uint8_t *pps, int spsLen, int ppsLen)
 }
 
 void VideoStream::sendFrame(int type, uint8_t *payload, int payloadLen) {
-    // 减去start code 4个字节
-    payloadLen -= 4;
-    payload += 4;
+    // 减去start code 3或4个字节
+    if (payload[2] == 0x00) {
+        payloadLen -= 4;
+        payload += 4;
+    } else {
+        payloadLen -= 3;
+        payload += 3;
+    }
     int i = 0;
     int bodySize = 9 + payloadLen;
     RTMPPacket *packet = new RTMPPacket();
