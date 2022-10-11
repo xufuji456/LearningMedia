@@ -14,8 +14,10 @@ project("likemedia")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+include_directories(.)
 include_directories(include)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SRC_LIST)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/ffmpeg SRC_FFMPEG)
 
 add_library( # Sets the name of the library.
         like_media
@@ -26,6 +28,7 @@ add_library( # Sets the name of the library.
         # Provides a relative path to your source file(s).
 #        native-lib.cpp
         ${SRC_LIST}
+        ${SRC_FFMPEG}
         )
 
 add_library(ffmpeg SHARED IMPORTED)
