@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btnFFmpegPush = findViewById(R.id.btn_ffmpeg_push);
         btnFFmpegPush.setOnClickListener(this);
+
+        Button btnVideoEdit = findViewById(R.id.btn_video_edit);
+        btnVideoEdit.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
