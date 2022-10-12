@@ -111,6 +111,8 @@ const int program_birth_year = 2000;
 
 static FILE *vstats_file;
 
+jmp_buf jump_buf;
+
 const char *const forced_keyframes_const_names[] = {
     "n",
     "n_forced",
@@ -4536,6 +4538,11 @@ int main(int argc, char **argv)
 
     av_log_set_flags(AV_LOG_SKIP_REPEATED);
     parse_loglevel(argc, argv, options);
+
+    if (setjmp(jump_buf)) {
+        main_return_code = 1;
+        goto end;
+    }
 
 #if CONFIG_AVDEVICE
     avdevice_register_all();
