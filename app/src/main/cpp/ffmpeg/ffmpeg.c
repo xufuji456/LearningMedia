@@ -652,6 +652,17 @@ static void ffmpeg_cleanup(int ret)
     }
     term_exit();
     ffmpeg_exited = 1;
+
+    filtergraphs = NULL;
+    nb_filtergraphs = 0;
+    output_files = NULL;
+    nb_output_files = 0;
+    output_streams = NULL;
+    nb_output_streams = 0;
+    input_files = NULL;
+    nb_input_files = 0;
+    input_streams = NULL;
+    nb_input_streams = 0;
 }
 
 void remove_avoptions(AVDictionary **a, AVDictionary *b)
@@ -4516,7 +4527,7 @@ int main(int argc, char **argv)
 {
     int i, ret;
     BenchmarkTimeStamps ti;
-
+    main_return_code = 0;
     init_dynload();
 
     register_exit(ffmpeg_cleanup);
@@ -4573,6 +4584,9 @@ int main(int argc, char **argv)
     if ((decode_error_stat[0] + decode_error_stat[1]) * max_error_rate < decode_error_stat[1])
         exit_program(69);
 
-    exit_program(received_nb_signals ? 255 : main_return_code);
+//    exit_program(received_nb_signals ? 255 : main_return_code);
+end:
+    av_log(NULL, AV_LOG_INFO, "FFmpeg result=%d\n", main_return_code);
+    ffmpeg_cleanup(0);
     return main_return_code;
 }
