@@ -5,6 +5,7 @@
     <string name="str_resample">resample</string>
     <string name="str_equalizer">equalizer</string>
     <string name="str_ffmpeg_push">ffmpeg push</string>
+    <string name="str_video_edit">video edit</string>
     <string name="audio_equalizer">均衡器</string>
     <string name="audio_effect">音效</string>
     <string name="audio_effect_echo">空灵</string>

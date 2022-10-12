@@ -93,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MediaJniHelper mediaJniHelper = new MediaJniHelper();
                 mediaJniHelper.pushStream(inputPath, outputPath);
                 break;
+            case R.id.btn_video_edit:
+
+                break;
             default:
                 break;
         }

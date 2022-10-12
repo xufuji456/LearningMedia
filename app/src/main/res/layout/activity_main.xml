@@ -9,7 +9,8 @@
         android:id="@+id/btn_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:text="@string/str_record"/>
 
     <Button
@@ -47,5 +48,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="@string/str_ffmpeg_push"/>
+
+    <Button
+        android:id="@+id/btn_video_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_equalizer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/str_video_edit"/>
 
 </RelativeLayout>
