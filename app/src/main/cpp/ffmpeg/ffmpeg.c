@@ -4525,7 +4525,7 @@ static int64_t getmaxrss(void)
 #endif
 }
 
-int main(int argc, char **argv)
+int run_ffmpeg(int argc, char **argv)
 {
     int i, ret;
     BenchmarkTimeStamps ti;

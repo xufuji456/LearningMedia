@@ -1,5 +1,9 @@
 package com.frank.media;
 
+import static com.frank.media.handler.FFmpegHandler.MSG_BEGIN;
+import static com.frank.media.handler.FFmpegHandler.MSG_END;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -8,9 +12,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.frank.media.handler.FFmpegHandler;
+import com.frank.media.util.FFmpegUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -97,11 +106,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mediaJniHelper.pushStream(inputPath, outputPath);
                 break;
             case R.id.btn_video_edit:
-
+                String one = "sdcard/one.mp4";
+                String two = "sdcard/two.mp4";
+                String output = "sdcard/xfade_left.mp4";
+                String transition = "slideleft";
+                FFmpegHandler ffmpegHandler = new FFmpegHandler(mHandler);
+                String[] cmdLine = FFmpegUtil.xfadeTransition(transition, one, 640, 360, 4, two, output);
+                ffmpegHandler.execFFmpegCommand(cmdLine);
                 break;
             default:
                 break;
         }
     }
+
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == MSG_BEGIN) {
+                Log.i("MainActivity", "FFmpeg begin...");
+            } else if (msg.what == MSG_END) {
+                int result = (int) msg.obj;
+                Log.i("MainActivity", "FFmpeg end result=" + result);
+            }
+        }
+    };
 
 }
