@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "LearningMedia"
 include ':app'
 include ':living'
+include ':CameraFilter'

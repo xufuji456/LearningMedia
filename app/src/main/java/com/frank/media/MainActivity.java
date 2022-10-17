@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btnVideoEdit = findViewById(R.id.btn_video_edit);
         btnVideoEdit.setOnClickListener(this);
+
+        Button btnCamera = findViewById(R.id.btn_camera);
+        btnCamera.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -114,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String[] cmdLine = FFmpegUtil.xfadeTransition(transition, one, 640, 360, 4, two, output);
                 ffmpegHandler.execFFmpegCommand(cmdLine);
                 break;
+            case R.id.btn_camera:
+                Intent cameraIntent = new Intent(MainActivity.this, CameraFilterActivity.class);
+                startActivity(cameraIntent);
             default:
                 break;
         }
