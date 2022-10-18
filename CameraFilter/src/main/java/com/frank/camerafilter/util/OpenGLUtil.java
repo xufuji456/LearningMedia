@@ -55,9 +55,13 @@ public class OpenGLUtil {
         return textures[0];
     }
 
+    // 加载着色器
     private static int loadShader(final String source, final int type) {
+        // 创建着色器
         int shader = GLES30.glCreateShader(type);
+        // 传递着色器源
         GLES30.glShaderSource(shader, source);
+        // 编译着色器
         GLES30.glCompileShader(shader);
         int[] compile = new int[1];
         GLES30.glGetShaderiv(shader, GLES30.GL_COMPILE_STATUS, compile, 0);
@@ -68,15 +72,21 @@ public class OpenGLUtil {
         return shader;
     }
 
+    // 加载程序
     public static int loadProgram(final String vertexSource, final String fragmentSource) {
+        // 顶点着色器
         int vertexShader   = loadShader(vertexSource, GLES30.GL_VERTEX_SHADER);
+        // 片元着色器
         int fragmentShader = loadShader(fragmentSource, GLES30.GL_FRAGMENT_SHADER);
         if (vertexShader == NO_SHADER || fragmentShader == NO_SHADER) {
             return 0;
         }
+        // 创建程序
         int programId = GLES30.glCreateProgram();
+        // 关联顶点着色器、片元着色器
         GLES30.glAttachShader(programId, vertexShader);
         GLES30.glAttachShader(programId, fragmentShader);
+        // 链接程序
         GLES30.glLinkProgram(programId);
         int[] linked = new int[1];
         GLES30.glGetProgramiv(programId, GLES30.GL_LINK_STATUS, linked, 0);
@@ -84,6 +94,7 @@ public class OpenGLUtil {
             programId = 0;
             Log.e("OpenGlUtil", "program link error=" + GLES30.glGetProgramInfoLog(programId));
         }
+        // 删除着色器
         GLES30.glDeleteShader(vertexShader);
         GLES30.glDeleteShader(fragmentShader);
         return programId;
@@ -100,6 +111,7 @@ public class OpenGLUtil {
         return textures[0];
     }
 
+    // 从资源文件读取着色器
     public static String readShaderFromSource(Context context, final int resourceId) {
         String line;
         StringBuilder builder = new StringBuilder();
