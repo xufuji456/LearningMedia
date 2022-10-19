@@ -2,17 +2,21 @@ package com.frank.camerafilter.render;
 
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.opengl.EGL14;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
+import android.os.Environment;
 
 import com.frank.camerafilter.camera.CameraManager;
 import com.frank.camerafilter.filter.BaseFilter;
 import com.frank.camerafilter.filter.BeautyCameraFilter;
+import com.frank.camerafilter.recorder.CameraVideoRecorder;
 import com.frank.camerafilter.util.OpenGLUtil;
 import com.frank.camerafilter.util.Rotation;
 import com.frank.camerafilter.util.TextureRotateUtil;
 import com.frank.camerafilter.view.BeautyCameraView;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -46,6 +50,19 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
 
     private final BeautyCameraView mCameraView;
 
+    private File outputFile;
+    private int recordStatus;
+    private boolean recordEnable;
+    private CameraVideoRecorder videoRecorder;
+
+    private final static int RECORDING_OFF    = 0;
+    private final static int RECORDING_ON     = 1;
+    private final static int RECORDING_RESUME = 2;
+
+    private static final int videoBitrate = 6 * 1024 * 1024;
+    private static final String videoName = "camera.mp4";
+    private static final String videoPath = Environment.getExternalStorageDirectory().getPath();
+
     public CameraRender(BeautyCameraView cameraView) {
         mCameraView = cameraView;
 
@@ -58,6 +75,11 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
         mTextureBuffer.put(TextureRotateUtil.TEXTURE_ROTATE_0).position(0);
+
+        recordEnable  = false;
+        recordStatus  = RECORDING_OFF;
+        outputFile    = new File(videoPath, videoName);
+        videoRecorder = new CameraVideoRecorder(mCameraView.getContext());
     }
 
     // 打开摄像头，实现预览
@@ -124,6 +146,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
             id = cameraFilter.onDrawToTexture(mTextureId);
             mFilter.onDrawFrame(id, mVertexBuffer, mTextureBuffer);
         }
+        onRecordVideo(id);
     }
 
     @Override
@@ -137,6 +160,54 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
             cameraManager.releaseCamera();
             cameraManager = null;
         }
+    }
+
+    private void onRecordVideo(int textureId) {
+        // 开启录像(开关)
+        if (recordEnable) {
+            switch (recordStatus) {
+                case RECORDING_OFF:
+                    // 开始录像
+                    videoRecorder.setPreviewSize(mImageWidth, mImageHeight);
+                    videoRecorder.setCubeBuffer(mVertexBuffer);
+                    videoRecorder.setTextureBuffer(mTextureBuffer);
+                    videoRecorder.startRecording(new CameraVideoRecorder.RecorderConfig(
+                            mImageWidth, mImageHeight, videoBitrate, outputFile, EGL14.eglGetCurrentContext()));
+                    recordStatus = RECORDING_ON;
+                    break;
+                case RECORDING_ON:
+                    break;
+                case RECORDING_RESUME:
+                    videoRecorder.updateSharedContext(EGL14.eglGetCurrentContext());
+                    recordStatus = RECORDING_ON;
+                    break;
+                default:
+                    throw new IllegalArgumentException("unknown status=" + recordStatus);
+            }
+        } else {
+            switch (recordStatus) {
+                case RECORDING_OFF:
+                    break;
+                case RECORDING_ON:
+                case RECORDING_RESUME:
+                    videoRecorder.stopRecording();
+                    recordStatus = RECORDING_OFF;
+                    break;
+                default:
+                    throw new IllegalArgumentException("unknown status=" + recordStatus);
+            }
+        }
+        // surface有数据更新，通知mediacodec去编码
+        videoRecorder.setTextureId(textureId);
+        videoRecorder.frameAvailable(surfaceTexture);
+    }
+
+    public void setRecording(boolean isRecording) {
+        recordEnable = isRecording;
+    }
+
+    public boolean isRecording() {
+        return recordEnable;
     }
 
 }

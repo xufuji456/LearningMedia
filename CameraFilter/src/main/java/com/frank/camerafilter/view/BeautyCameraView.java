@@ -37,4 +37,17 @@ public class BeautyCameraView extends GLSurfaceView {
             cameraRender.releaseCamera();
         }
     }
+
+    public void setRecording(boolean isRecording) {
+        if (cameraRender == null)
+            return;
+        cameraRender.setRecording(isRecording);
+    }
+
+    public boolean isRecording() {
+        if (cameraRender == null)
+            return false;
+        return cameraRender.isRecording();
+    }
+
 }
