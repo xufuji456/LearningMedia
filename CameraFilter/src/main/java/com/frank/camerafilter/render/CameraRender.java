@@ -8,6 +8,8 @@ import android.opengl.GLSurfaceView;
 import android.os.Environment;
 
 import com.frank.camerafilter.camera.CameraManager;
+import com.frank.camerafilter.factory.BeautyFilterFactory;
+import com.frank.camerafilter.factory.BeautyFilterType;
 import com.frank.camerafilter.filter.BaseFilter;
 import com.frank.camerafilter.filter.BeautyCameraFilter;
 import com.frank.camerafilter.recorder.CameraVideoRecorder;
@@ -127,6 +129,7 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
         mSurfaceHeight = height;
         // 开始预览
         cameraManager.startPreview(surfaceTexture);
+        onFilterChanged();
     }
 
     @Override
@@ -208,6 +211,36 @@ public class CameraRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFr
 
     public boolean isRecording() {
         return recordEnable;
+    }
+
+    public void setFilter(BeautyFilterType type) {
+        mCameraView.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                if (mFilter != null) {
+                    mFilter.destroy();
+                }
+                mFilter = null;
+                mFilter = BeautyFilterFactory.getFilter(type, mCameraView.getContext());
+                if (mFilter != null) {
+                    mFilter.init();
+                }
+                onFilterChanged();
+            }
+        });
+    }
+
+    public void onFilterChanged() {
+        if (mFilter != null) {
+            mFilter.onInputSizeChanged(mImageWidth, mImageHeight);
+            mFilter.onOutputSizeChanged(mSurfaceWidth, mSurfaceHeight);
+        }
+        cameraFilter.onOutputSizeChanged(mSurfaceWidth, mSurfaceHeight);
+        if (mFilter != null) {
+            cameraFilter.initFrameBuffer(mImageWidth, mImageHeight);
+        } else {
+            cameraFilter.destroyFrameBuffer();
+        }
     }
 
 }

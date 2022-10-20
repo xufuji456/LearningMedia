@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 
+import com.frank.camerafilter.factory.BeautyFilterType;
 import com.frank.camerafilter.render.CameraRender;
 
 /**
@@ -48,6 +49,12 @@ public class BeautyCameraView extends GLSurfaceView {
         if (cameraRender == null)
             return false;
         return cameraRender.isRecording();
+    }
+
+    public void setFilter(BeautyFilterType type) {
+        if (cameraRender == null)
+            return;
+        cameraRender.setFilter(type);
     }
 
 }

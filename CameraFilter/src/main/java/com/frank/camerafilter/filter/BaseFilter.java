@@ -3,6 +3,7 @@ package com.frank.camerafilter.filter;
 import android.opengl.GLES30;
 
 import com.frank.camerafilter.util.OpenGLUtil;
+import com.frank.camerafilter.util.Rotation;
 import com.frank.camerafilter.util.TextureRotateUtil;
 
 import java.nio.ByteBuffer;
@@ -46,12 +47,13 @@ public class BaseFilter {
         mVertexBuffer = ByteBuffer.allocateDirect(TextureRotateUtil.VERTEX.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        mVertexBuffer.position(0);
+        mVertexBuffer.put(TextureRotateUtil.VERTEX).position(0);
         // 创建纹理缓冲区
         mTextureBuffer = ByteBuffer.allocateDirect(TextureRotateUtil.TEXTURE_ROTATE_0.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        mTextureBuffer.position(0);
+        mTextureBuffer.put(TextureRotateUtil.getRotateTexture(Rotation.NORMAL, false, true))
+                .position(0);
     }
 
     protected void onInit() {
