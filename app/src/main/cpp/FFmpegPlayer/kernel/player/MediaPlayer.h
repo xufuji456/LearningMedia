@@ -43,8 +43,7 @@ private:
 
     void closeDecoder(int streamIndex);
 
-    int openAudioRender(int64_t wanted_channel_layout, int wanted_nb_channels,
-                        int wanted_sample_rate);
+    int openAudioRender(AVChannelLayout layout, int wanted_sample_rate);
 
     void startAudioRender(PlayerParam *playerParam);
 
@@ -97,7 +96,7 @@ public:
 
     AVFormatContext *getMetadata() const;
 
-    void pcmQueueCallback(uint8_t *stream, int len);
+    void pcmCallback(uint8_t *stream, int len);
 
     void stop();
 

@@ -54,9 +54,9 @@ public class PlayerViewController implements View.OnClickListener, PlayerManager
 
     private final static int MSG_PROGRESS = 54321;
 
-    private final static String path = "sdcard/angry_birds.mp4";
+    private final static String path = "sdcard/big_buck_bunny.mp4";
     private final static String prevPath = "sdcard/what.mp4";
-    private final static String nextPath = "sdcard/beyond.mp4";
+    private final static String nextPath = "sdcard/birds.mp4";
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
