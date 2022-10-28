@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.frank.media.handler.FFmpegHandler;
+import com.frank.media.player.activity.PlayerActivity;
 import com.frank.media.util.FFmpegUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btnCamera = findViewById(R.id.btn_camera);
         btnCamera.setOnClickListener(this);
+
+        Button btnPlayer = findViewById(R.id.btn_player);
+        btnPlayer.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -120,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_camera:
                 Intent cameraIntent = new Intent(MainActivity.this, CameraFilterActivity.class);
                 startActivity(cameraIntent);
+                break;
+            case R.id.btn_player:
+                Intent playerIntent = new Intent(MainActivity.this, PlayerActivity.class);
+                startActivity(playerIntent);
+                break;
             default:
                 break;
         }

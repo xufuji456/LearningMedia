@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_media_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"/>
+
+    <SurfaceView
+        android:id="@+id/surface_player"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp">
+
+        <SeekBar
+            android:id="@+id/play_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txt_cur_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/txt_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/blue"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginEnd="8dp" />
+
+        <ImageView
+            android:id="@+id/btn_play_pause"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="16dp"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/btn_audio_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="10dp"
+            android:layout_toStartOf="@+id/btn_play_pause"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/blue"
+            android:text="音轨"
+            android:background="?android:attr/selectableItemBackground"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/btn_previous"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="16dp"
+            android:layout_toStartOf="@+id/btn_play_pause"
+            android:layout_marginEnd="28dp"
+            android:src="@drawable/ic_previous"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <ImageView
+            android:id="@+id/btn_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="16dp"
+            android:layout_toEndOf="@+id/btn_play_pause"
+            android:layout_marginStart="28dp"
+            android:src="@drawable/ic_next"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/btn_screen_shot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="30dp"
+            android:layout_toStartOf="@+id/btn_previous"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/blue"
+            android:text="截图"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/btn_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/play_bar"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@+id/btn_next"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/blue"
+            android:text="倍速"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

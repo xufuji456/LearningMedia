@@ -36,6 +36,8 @@ set_target_properties(ffmpeg
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs/${CMAKE_ANDROID_ARCH_ABI}/libffmpeg.so)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/FFmpegPlayer)
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library

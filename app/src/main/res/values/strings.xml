@@ -7,6 +7,7 @@
     <string name="str_ffmpeg_push">ffmpeg push</string>
     <string name="str_video_edit">video edit</string>
     <string name="str_camera">Camera</string>
+    <string name="str_player">Player</string>
     <string name="audio_equalizer">均衡器</string>
     <string name="audio_effect">音效</string>
     <string name="audio_effect_echo">空灵</string>
@@ -15,4 +16,5 @@
     <string name="audio_effect_lolita">萝莉</string>
     <string name="audio_effect_uncle">大叔</string>
 
+    <string name="select_track">选择音轨</string>
 </resources>
