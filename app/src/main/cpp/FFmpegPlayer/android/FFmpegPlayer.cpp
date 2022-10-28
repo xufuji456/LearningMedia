@@ -163,13 +163,6 @@ long FFmpegPlayer::getDuration() {
     return -1;
 }
 
-int FFmpegPlayer::selectTrack(int trackId, bool selected) {
-    if (m_mediaPlayer != nullptr) {
-        return m_mediaPlayer->selectTrack(trackId, selected);
-    }
-    return -1;
-}
-
 void FFmpegPlayer::setVolume(float volume) {
     if (m_mediaPlayer != nullptr) {
         m_mediaPlayer->setVolume(volume);

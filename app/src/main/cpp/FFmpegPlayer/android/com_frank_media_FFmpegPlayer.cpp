@@ -313,14 +313,6 @@ void FFmpegPlayer_setRate(JNIEnv *env, jobject thiz, jfloat speed) {
     mp->setRate(speed);
 }
 
-int FFmpegPlayer_selectTrack(JNIEnv *env, jobject thiz, int trackId, jboolean selected) {
-    FFmpegPlayer *mp = getFFmpegPlayer(env, thiz);
-    if (mp == nullptr) {
-        return -1;
-    }
-    return mp->selectTrack(trackId, selected);
-}
-
 jlong FFmpegPlayer_getCurrentPosition(JNIEnv *env, jobject thiz) {
 
     FFmpegPlayer *mp = getFFmpegPlayer(env, thiz);
@@ -470,7 +462,6 @@ static const JNINativeMethod gMethods[] = {
         {"native_isPlaying", "()Z", (void *) FFmpegPlayer_isPlaying},
         {"native_getCurrentPosition", "()J", (void *) FFmpegPlayer_getCurrentPosition},
         {"native_getDuration", "()J", (void *) FFmpegPlayer_getDuration},
-        {"native_selectTrack", "(IZ)I", (void *) FFmpegPlayer_selectTrack},
         {"native_setVolume", "(F)V", (void *) FFmpegPlayer_setVolume},
         {"native_setMute", "(Z)V", (void *) FFmpegPlayer_setMute},
         {"native_setRate", "(F)V", (void *) FFmpegPlayer_setRate},

@@ -83,8 +83,6 @@ public:
 
     long getDuration();
 
-    int selectTrack(int trackId, bool selected);
-
     void setVolume(float volume);
 
     void setMute(bool mute);

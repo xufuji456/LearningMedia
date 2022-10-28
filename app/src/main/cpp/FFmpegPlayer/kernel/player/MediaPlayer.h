@@ -73,8 +73,6 @@ public:
 
     void seekTo(long timeMs);
 
-    int selectTrack(int trackId, bool selected);
-
     void setVolume(float volume);
 
     void setMute(int mute);
