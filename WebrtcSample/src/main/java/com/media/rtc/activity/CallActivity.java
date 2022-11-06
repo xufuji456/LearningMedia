@@ -150,11 +150,6 @@ public class CallActivity extends AppCompatActivity implements CallSession.CallS
     }
 
     @Override
-    public void didUserLeave(String userId) {
-        handler.post(() -> currentFragment.didUserLeave(userId));
-    }
-
-    @Override
     public void didDisconnected(String userId) {
         handler.post(() -> currentFragment.didDisconnected(userId));
     }

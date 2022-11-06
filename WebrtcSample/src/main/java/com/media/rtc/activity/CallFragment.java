@@ -239,10 +239,6 @@ public class CallFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void didUserLeave(String userId) {
-        Log.i(TAG, "didUserLeave=" + userId);
-    }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
