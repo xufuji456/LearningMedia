@@ -21,10 +21,13 @@ public class Const {
 
     public final static String TURN_SERVER1 = "turn:" + IP_HOST + ":3478?transport=tcp";
 
-    // 用户名
-    public final static String USER_NAME = "ddssingsong";
+
+
 
     // 密码
     public final static String PASSWORD = "123456";
+
+    // 用户名
+    public final static String USER_NAME = "ddssingsong";
 
 }
