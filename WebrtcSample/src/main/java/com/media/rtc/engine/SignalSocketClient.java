@@ -13,6 +13,9 @@ import java.net.URI;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
+/**
+ * 发送和接收信令
+ */
 public class SignalSocketClient extends WebSocketClient {
 
     private final static String TAG = SignalSocketClient.class.getSimpleName();
@@ -66,6 +69,7 @@ public class SignalSocketClient extends WebSocketClient {
         mConnectFlag = true;
     }
 
+    // 接收到信令
     @Override
     public void onMessage(String message) {
         try {
@@ -118,7 +122,7 @@ public class SignalSocketClient extends WebSocketClient {
             case EVENT_INVITE: // 邀请通话
                 handleInvite(data);
                 break;
-            case EVENT_CANCEL: // 取消接听
+            case EVENT_CANCEL: // 取消通话
                 handleCancel(data);
                 break;
             case EVENT_PEER: // 成员加入
