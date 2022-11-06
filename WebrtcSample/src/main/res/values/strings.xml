@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AppRTC</string>
+
+    <string name="str_waiting">等待对方接受邀请</string>
+    <string name="str_audio_invite">邀请语音通话</string>
+    <string name="str_video_invite">邀请视频通话</string>
+
+    <string name="str_cancel_call">取消</string>
+    <string name="str_accept_call">接听</string>
+    <string name="str_hang_up">挂断</string>
+
+</resources>
