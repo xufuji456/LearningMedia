@@ -155,6 +155,7 @@ public class CallFragment extends Fragment implements View.OnClickListener {
                 layoutConnected.setVisibility(View.GONE);
                 txtTip.setText(R.string.str_video_invite);
                 if (currentState == CallSession.CallState.Incoming) {
+                    // 接收方，设置本地预览
                     View surfaceView = callActivity.getCurrentSession().setupLocalVideo(false);
                     if (surfaceView != null) {
                         localSurfaceView = (SurfaceViewRenderer) surfaceView;
@@ -186,6 +187,7 @@ public class CallFragment extends Fragment implements View.OnClickListener {
         runOnUiThread(() -> callActivity.switchAudio());
     }
 
+    // 发起方设置本地预览
     public void didCreateLocalVideoTrack() {
         if (localSurfaceView == null) {
             View surfaceView = callActivity.getCurrentSession().setupLocalVideo(true);
@@ -212,6 +214,7 @@ public class CallFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    // 接通电话，设置远端预览
     public void didReceiveRemoteVideoTrack(String userId) {
         pipRenderer.setVisibility(View.VISIBLE);
         if (localSurfaceView != null) {
