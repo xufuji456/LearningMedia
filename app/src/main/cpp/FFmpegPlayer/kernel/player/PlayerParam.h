@@ -109,12 +109,9 @@ public:
     int m_seekRequest;
     int64_t m_seekPos;
     float m_playbackRate;
-    int m_decodeFastFlag;
 
     bool m_firstVideoFrame;
-    bool m_firstAudioFrame;
 
-    int m_loop;
     int m_mute;
     int m_frameDrop;
     int m_reorderVideoPts;

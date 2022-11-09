@@ -27,9 +27,7 @@ void PlayerParam::init() {
     m_subtitleCodecCtx = nullptr;
     m_messageQueue     = new FFMessageQueue();
 
-    m_loop = 1;
     m_mute = 0;
-    m_decodeFastFlag = 0;
     m_seekPos = 0;
     m_seekFlag = 0;
     m_frameDrop = 1;
@@ -47,6 +45,5 @@ void PlayerParam::init() {
     m_syncType = AV_SYNC_AUDIO;
     m_duration = AV_NOPTS_VALUE;
     m_startTime = AV_NOPTS_VALUE;
-    m_firstAudioFrame = false;
     m_firstVideoFrame = false;
 }
