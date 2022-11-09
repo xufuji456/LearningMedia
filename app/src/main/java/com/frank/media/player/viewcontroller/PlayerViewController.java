@@ -181,7 +181,7 @@ public class PlayerViewController implements View.OnClickListener, PlayerManager
                 mPlayerManager.pause();
                 btnPlayControl.setImageResource(R.drawable.ic_play);
             } else {
-                mPlayerManager.start();
+                mPlayerManager.resume();
                 btnPlayControl.setImageResource(R.drawable.ic_pause);
             }
         } else if (view.getId() == R.id.btn_speed) {

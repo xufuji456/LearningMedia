@@ -238,26 +238,12 @@ int MediaPlayer::reset() {
     return 0;
 }
 
-void startAudioDecoder(PlayerParam *playerParam, AudioDecoder *audioDecoder) {
-    if (audioDecoder != nullptr) {
-        audioDecoder->start();
-    } else {
-        // 没有音频流，切换外部时钟作为参考时钟
-        if (playerParam->m_syncType == AV_SYNC_AUDIO) {
-            playerParam->m_syncType = AV_SYNC_EXTERNAL;
-        }
-    }
-}
-
 void MediaPlayer::startAudioRender(PlayerParam *playerParam) {
     if (playerParam->m_audioCodecCtx) {
         int ret = openAudioRender(playerParam->m_audioCodecCtx->ch_layout,
                                   playerParam->m_audioCodecCtx->sample_rate);
         if (ret < 0) {
-            // 打开音频Render失败，切换外部时钟作为参考时钟
-            if (playerParam->m_syncType == AV_SYNC_AUDIO) {
-                playerParam->m_syncType = AV_SYNC_EXTERNAL;
-            }
+            closeDecoder(m_playerParam->m_audioIndex);
         } else {
             m_audioRender->start();
         }
@@ -297,7 +283,7 @@ int MediaPlayer::openDecoder(int streamIndex) {
                 m_playerParam->m_audioCodecCtx = codecContext;
                 m_playerParam->m_audioStream = m_playerParam->m_formatCtx->streams[streamIndex];
                 m_audioDecoder = new AudioDecoder(m_playerParam);
-                startAudioDecoder(m_playerParam, m_audioDecoder);
+                m_audioDecoder->start();
                 startAudioRender(m_playerParam);
                 m_avSync->setAudioDecoder(m_audioDecoder);
                 break;
@@ -441,7 +427,22 @@ void MediaPlayer::pcmCallback(uint8_t *stream, int len) {
     }
     // 音频重采样
     m_audioResampler->pcmQueueCallback(stream, len);
+}
 
+static AVSyncType get_master_sync_type(int av_sync_type, AVStream *video_st, AVStream *audio_st) {
+    if (av_sync_type == AV_SYNC_VIDEO) {
+        if (video_st)
+            return AV_SYNC_VIDEO;
+        else
+            return AV_SYNC_AUDIO;
+    } else if (av_sync_type == AV_SYNC_AUDIO) {
+        if (audio_st)
+            return AV_SYNC_AUDIO;
+        else
+            return AV_SYNC_EXTERNAL;
+    } else {
+        return AV_SYNC_EXTERNAL;
+    }
 }
 
 void MediaPlayer::run() {
@@ -509,16 +510,13 @@ int MediaPlayer::readPackets() {
                                                    (void*)msg, (int)strlen(msg));
     }
     m_playerParam->m_messageQueue->sendMessage(MSG_ON_PREPARED);
+    // 获取参考时钟
+    m_playerParam->m_syncType = get_master_sync_type(m_playerParam->m_syncType,
+                                                     m_playerParam->m_videoStream,
+                                                     m_playerParam->m_audioStream);
     // 启动视频解码器
     if (m_videoDecoder) {
         m_videoDecoder->start();
-    } else {
-        // 切换参考时钟
-        if (m_playerParam->m_syncType == AV_SYNC_VIDEO) {
-            m_playerParam->m_syncType = AV_SYNC_EXTERNAL;
-        }
-    }
-    if (m_videoDecoder) {
         if (m_playerParam->m_syncType == AV_SYNC_VIDEO) {
             m_videoDecoder->setMasterClock(m_avSync->getVideoClock());
         } else if (m_playerParam->m_syncType == AV_SYNC_AUDIO) {
@@ -585,7 +583,7 @@ int MediaPlayer::readPackets() {
         }
         // 判断packet队列是否缓冲满
         if ((!m_audioDecoder || m_audioDecoder->hasEnoughPackets(m_playerParam->m_audioStream))
-            || (!m_videoDecoder || m_videoDecoder->hasEnoughPackets(m_playerParam->m_videoStream))) {
+            && (!m_videoDecoder || m_videoDecoder->hasEnoughPackets(m_playerParam->m_videoStream))) {
             continue;
         }
         if (!waitSeek) {
