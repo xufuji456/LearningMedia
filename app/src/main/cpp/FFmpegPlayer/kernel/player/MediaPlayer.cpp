@@ -143,7 +143,7 @@ long MediaPlayer::getCurrentPosition() {
         } else {
             pos = (int64_t)(clock * 1000);
         }
-        return pos;
+        return pos < m_duration ? pos : m_duration;
     }
 }
 
