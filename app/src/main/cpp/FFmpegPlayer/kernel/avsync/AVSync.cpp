@@ -70,10 +70,6 @@ void AVSync::setAudioDecoder(AudioDecoder *audioDecoder) {
     this->m_audioDecoder = audioDecoder;
 }
 
-void AVSync::setMaxDuration(double maxDuration) {
-    this->m_maxFrameDuration = maxDuration;
-}
-
 void AVSync::refreshVideoTimer() {
     m_syncMutex.lock();
     this->m_timerRefresh = 1;
@@ -332,6 +328,16 @@ void AVSync::run() {
 
     m_exit = true;
     m_syncCond.signal();
+}
+
+void AVSync::updateClock(bool paused) {
+    m_videoClock->pause(paused);
+    m_audioClock->pause(paused);
+    m_externalClock->pause(paused);
+
+    m_videoClock->setClock(m_videoClock->getClock());
+    m_audioClock->setClock(m_audioClock->getClock());
+    m_externalClock->setClock(m_externalClock->getClock());
 }
 
 void AVSync::stop() {

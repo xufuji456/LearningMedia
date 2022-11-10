@@ -3,7 +3,7 @@
 
 MediaClock::MediaClock() {
     m_pts        = 0;
-    m_pause      = 0;
+    m_pause      = false;
     m_speed      = 1.0;
     m_pts_drift  = 0;
     m_lastUpdate = 0;
@@ -51,5 +51,9 @@ void MediaClock::syncToSlave(MediaClock *slave) {
     if (!isnan(slave_clock) && (isnan(clock) || fabs(clock - slave_clock) > AV_NOSYNC_THRESHOLD)) {
         setClock(slave_clock);
     }
+}
+
+void MediaClock::pause(bool paused) {
+    m_pause = paused;
 }
 

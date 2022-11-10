@@ -60,12 +60,14 @@ void MediaPlayer::start() {
 void MediaPlayer::pause() {
     Mutex::AutoLock lock(m_playerMutex);
     m_playerParam->m_pauseReq = 1;
+    m_avSync->updateClock(true);
     m_playerCond.signal();
 }
 
 void MediaPlayer::resume() {
     Mutex::AutoLock lock(m_playerMutex);
     m_playerParam->m_pauseReq = 0;
+    m_avSync->updateClock(false);
     m_playerCond.signal();
 }
 

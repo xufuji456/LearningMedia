@@ -60,8 +60,6 @@ public:
 
     void setAudioDecoder(AudioDecoder *audioDecoder);
 
-    void setMaxDuration(double maxDuration);
-
     void refreshVideoTimer();
 
     double getAudioDiffClock();
@@ -79,6 +77,8 @@ public:
     MediaClock *getExternalClock();
 
     void run() override;
+
+    void updateClock(bool paused);
 
     void stop();
 

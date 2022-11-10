@@ -3,6 +3,7 @@
 #define MEDIACLOCK_H
 
 #include <math.h>
+#include <atomic>
 
 extern "C" {
 #include <libavutil/time.h>
@@ -11,11 +12,13 @@ extern "C" {
 class MediaClock {
 
 private:
-    int m_pause;
+
     double m_pts;
     double m_speed;
     double m_pts_drift;
     double m_lastUpdate;
+
+    std::atomic<bool> m_pause;
 
 public:
     MediaClock();
@@ -36,8 +39,8 @@ public:
 
     void syncToSlave(MediaClock *slave);
 
+    void pause(bool paused);
+
 };
-
-
 
 #endif //MEDIACLOCK_H
