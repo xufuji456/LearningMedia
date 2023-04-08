@@ -17,6 +17,7 @@ public final class TransformerMediaClock implements MediaClock {
 
   private final SparseLongArray trackTypeToTimeUs;
   private long minTrackTimeUs;
+  private static final long TIME_UNSET = Long.MIN_VALUE + 1;
 
   public TransformerMediaClock() {
     trackTypeToTimeUs = new SparseLongArray();
@@ -27,14 +28,14 @@ public final class TransformerMediaClock implements MediaClock {
    * track times.
    */
   public void updateTimeForTrackType(@MediaUtil.TrackType int trackType, long timeUs) {
-    long previousTimeUs = trackTypeToTimeUs.get(trackType, Long.MIN_VALUE + 1);
-    if (previousTimeUs != Long.MIN_VALUE + 1 && timeUs <= previousTimeUs) {
+    long previousTimeUs = trackTypeToTimeUs.get(trackType, TIME_UNSET);
+    if (previousTimeUs != TIME_UNSET && timeUs <= previousTimeUs) {
       // Make sure that the track times are increasing and therefore that the clock time is
       // increasing. This is necessary for progress updates.
       return;
     }
     trackTypeToTimeUs.put(trackType, timeUs);
-    if (previousTimeUs == Long.MIN_VALUE + 1 || previousTimeUs == minTrackTimeUs) {
+    if (previousTimeUs == TIME_UNSET || previousTimeUs == minTrackTimeUs) {
       minTrackTimeUs = minValue(trackTypeToTimeUs);
     }
   }

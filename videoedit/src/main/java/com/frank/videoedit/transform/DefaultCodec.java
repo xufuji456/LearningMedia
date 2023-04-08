@@ -2,7 +2,6 @@
 package com.frank.videoedit.transform;
 
 import android.content.Context;
-import android.media.AudioFormat;
 import android.media.MediaCodec;
 import android.media.MediaCodec.BufferInfo;
 import android.media.MediaFormat;
@@ -33,7 +32,7 @@ import com.google.android.exoplayer2.decoder.DecoderInputBuffer;
 
 public final class DefaultCodec implements Codec {
 
-  private static final int MEDIA_CODEC_PCM_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+  private static final int MEDIA_CODEC_PCM_ENCODING = MediaUtil.ENCODING_PCM_16BIT;
 
   private final BufferInfo outputBufferInfo;
   /** The {@link MediaFormat} used to configure the underlying {@link MediaCodec}. */
