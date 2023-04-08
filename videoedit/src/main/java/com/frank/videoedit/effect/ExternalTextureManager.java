@@ -38,6 +38,7 @@ public class ExternalTextureManager implements GlTextureProcessor.InputListener 
   @Nullable private volatile FrameInfo currentFrame;
 
   private long previousStreamOffsetUs;
+  private static final long TIME_UNSET = Long.MIN_VALUE + 1;
 
   public ExternalTextureManager(
       ExternalTextureProcessor externalTextureProcessor,
@@ -54,7 +55,7 @@ public class ExternalTextureManager implements GlTextureProcessor.InputListener 
     pendingFrames = new ConcurrentLinkedQueue<>();
     availableFrameCount = new AtomicInteger();
     externalTextureProcessorInputCapacity = new AtomicInteger();
-    previousStreamOffsetUs = -1;
+    previousStreamOffsetUs = TIME_UNSET;
   }
 
   public SurfaceTexture getSurfaceTexture() {
@@ -117,7 +118,7 @@ public class ExternalTextureManager implements GlTextureProcessor.InputListener 
     long frameTimeNs = surfaceTexture.getTimestamp();
     long streamOffsetUs = currentFrame.streamOffsetUs;
     if (streamOffsetUs != previousStreamOffsetUs) {
-      if (previousStreamOffsetUs != Long.MIN_VALUE + 1) {
+      if (previousStreamOffsetUs != TIME_UNSET) {
         externalTextureProcessor.signalEndOfCurrentInputStream();
       }
       previousStreamOffsetUs = streamOffsetUs;

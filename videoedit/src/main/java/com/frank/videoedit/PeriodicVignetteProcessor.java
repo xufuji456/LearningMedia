@@ -8,14 +8,14 @@ import android.opengl.GLES20;
 import android.util.Log;
 import android.util.Pair;
 
-import com.frank.videoedit.effect.SingleFrameGlTextureProcessor;
+import com.frank.videoedit.effect.TextureProcessorBase;
 import com.google.android.exoplayer2.util.FrameProcessingException;
 import com.google.android.exoplayer2.util.GlProgram;
 import com.google.android.exoplayer2.util.GlUtil;
 
 import java.io.IOException;
 
-/* package */ final class PeriodicVignetteProcessor extends SingleFrameGlTextureProcessor {
+/* package */ final class PeriodicVignetteProcessor extends TextureProcessorBase {
 
   private static final String VERTEX_SHADER_PATH = "vertex_copy_es2.glsl";
   private static final String FRAGMENT_SHADER_PATH = "fragment_vignette_es2.glsl";
@@ -58,7 +58,7 @@ import java.io.IOException;
   }
 
   @Override
-  public void drawFrame(int inputTexId, long presentationTimeUs) throws FrameProcessingException {
+  public void drawFrame(int inputTexId, long presentationTimeUs) {
     try {
       glProgram.use();
       glProgram.setSamplerTexIdUniform("uTexSampler", inputTexId, /* texUnitIndex= */ 0);
@@ -70,7 +70,7 @@ import java.io.IOException;
       // The four-vertex triangle strip forms a quad.
       GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, /* first= */ 0, /* count= */ 4);
     } catch (GlUtil.GlException e) {
-      throw new FrameProcessingException(e, presentationTimeUs);
+      throw new RuntimeException(e);
     }
   }
 

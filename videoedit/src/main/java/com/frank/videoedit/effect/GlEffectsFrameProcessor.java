@@ -203,6 +203,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
   private FrameInfo nextInputFrameInfo;
 
   private long previousStreamOffsetUs;
+  private static final long TIME_UNSET = Long.MIN_VALUE + 1;
 
   private GlEffectsFrameProcessor(
       EGLDisplay eglDisplay,
@@ -224,7 +225,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
     inputSurface = new Surface(inputExternalTextureManager.getSurfaceTexture());
     finalTextureProcessorWrapper = (TextureProcessorWrapper) getLast(textureProcessors);
     allTextureProcessors = textureProcessors;
-    previousStreamOffsetUs = Long.MIN_VALUE + 1;
+    previousStreamOffsetUs = TIME_UNSET;
   }
 
   @Override
