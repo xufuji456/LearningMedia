@@ -21,7 +21,6 @@ import com.frank.videoedit.listener.GlMatrixTransform;
 import com.frank.videoedit.listener.GlTextureProcessor;
 
 import com.frank.videoedit.util.GlUtil;
-import com.google.android.exoplayer2.util.FrameProcessingException;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;

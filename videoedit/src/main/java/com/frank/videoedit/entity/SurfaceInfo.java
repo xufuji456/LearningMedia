@@ -13,10 +13,6 @@ public final class SurfaceInfo {
 
   public final int orientationDegrees;
 
-  public SurfaceInfo(Surface surface, int width, int height) {
-    this(surface, width, height, 0);
-  }
-
   public SurfaceInfo(Surface surface, int width, int height, int orientationDegrees) {
     this.width              = width;
     this.height             = height;

@@ -25,27 +25,6 @@ import java.io.IOException;
   private final float minInnerRadius;
   private final float deltaInnerRadius;
 
-  /**
-   * Creates a new instance.
-   *
-   * <p>The inner radius of the vignette effect oscillates smoothly between {@code minInnerRadius}
-   * and {@code maxInnerRadius}.
-   *
-   * <p>The pixels between the inner radius and the {@code outerRadius} are darkened linearly based
-   * on their distance from {@code innerRadius}. All pixels outside {@code outerRadius} are black.
-   *
-   * <p>The parameters are given in normalized texture coordinates from 0 to 1.
-   *
-   * @param context The {@link Context}.
-   * @param useHdr Whether input textures come from an HDR source. If {@code true}, colors will be
-   *     in linear RGB BT.2020. If {@code false}, colors will be in linear RGB BT.709.
-   * @param centerX The x-coordinate of the center of the effect.
-   * @param centerY The y-coordinate of the center of the effect.
-   * @param minInnerRadius The lower bound of the radius that is unaffected by the effect.
-   * @param maxInnerRadius The upper bound of the radius that is unaffected by the effect.
-   * @param outerRadius The radius after which all pixels are black.
-   * @throws FrameProcessingException If a problem occurs while reading shader files.
-   */
   public PeriodicVignetteProcessor(
       Context context,
       boolean useHdr,

@@ -6,6 +6,7 @@ import static com.google.android.exoplayer2.util.Assertions.checkState;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -203,7 +204,7 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode, String[] permissions, int[] grantResults) {
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == FILE_PERMISSION_REQUEST_CODE
@@ -346,7 +347,6 @@ public class EditActivity extends AppCompatActivity {
                 .show();
     }
 
-    @RequiresNonNull("demoEffectsSelections")
     private void selectDemoEffect(DialogInterface dialog, int which, boolean isChecked) {
         demoEffectsSelections[which] = isChecked;
         if (!isChecked) {

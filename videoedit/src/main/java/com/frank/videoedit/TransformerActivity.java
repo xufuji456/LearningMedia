@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.exoplayer2.C;
@@ -50,9 +49,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.base.Ticker;
 import com.google.common.collect.ImmutableList;
 
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.checkerframework.checker.nullness.qual.RequiresNonNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -62,16 +58,16 @@ import java.util.concurrent.TimeUnit;
 public final class TransformerActivity extends AppCompatActivity {
   private static final String TAG = "TransformerActivity";
 
-  private @MonotonicNonNull Button displayInputButton;
-  private @MonotonicNonNull MaterialCardView inputCardView;
-  private @MonotonicNonNull StyledPlayerView inputPlayerView;
-  private @MonotonicNonNull StyledPlayerView outputPlayerView;
-  private @MonotonicNonNull TextView debugTextView;
-  private @MonotonicNonNull TextView informationTextView;
-  private @MonotonicNonNull ViewGroup progressViewGroup;
-  private @MonotonicNonNull LinearProgressIndicator progressIndicator;
-  private @MonotonicNonNull Stopwatch transformationStopwatch;
-  private @MonotonicNonNull AspectRatioFrameLayout debugFrame;
+  private Button displayInputButton;
+  private MaterialCardView inputCardView;
+  private StyledPlayerView inputPlayerView;
+  private StyledPlayerView outputPlayerView;
+  private TextView debugTextView;
+  private TextView informationTextView;
+  private ViewGroup progressViewGroup;
+  private LinearProgressIndicator progressIndicator;
+  private Stopwatch transformationStopwatch;
+  private AspectRatioFrameLayout debugFrame;
 
   @Nullable private DebugTextViewHelper debugTextViewHelper;
   @Nullable private ExoPlayer inputPlayer;
@@ -389,14 +385,6 @@ public final class TransformerActivity extends AppCompatActivity {
     }
   }
 
-  private void showToast(@StringRes int messageResource) {
-    Toast.makeText(getApplicationContext(), getString(messageResource), Toast.LENGTH_LONG).show();
-  }
-
-  @RequiresNonNull({
-    "inputCardView",
-    "displayInputButton",
-  })
   private void toggleInputVideoDisplay(View view) {
     if (inputCardView.getVisibility() == View.GONE) {
       inputCardView.setVisibility(View.VISIBLE);
@@ -410,7 +398,7 @@ public final class TransformerActivity extends AppCompatActivity {
 
   private final class DemoDebugViewProvider implements DebugViewProvider {
 
-    private @MonotonicNonNull SurfaceView surfaceView;
+    private SurfaceView surfaceView;
     private int width;
     private int height;
 
