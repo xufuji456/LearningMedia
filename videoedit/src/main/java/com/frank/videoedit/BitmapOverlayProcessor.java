@@ -18,7 +18,6 @@ import android.util.Pair;
 
 import com.frank.videoedit.effect.TextureProcessorBase;
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.util.FrameProcessingException;
 import com.google.android.exoplayer2.util.GlProgram;
 import com.google.android.exoplayer2.util.GlUtil;
 
@@ -42,14 +41,6 @@ import java.util.Locale;
   private float bitmapScaleY;
   private int bitmapTexId;
 
-  /**
-   * Creates a new instance.
-   *
-   * @param context The {@link Context}.
-   * @param useHdr Whether input textures come from an HDR source. If {@code true}, colors will be
-   *     in linear RGB BT.2020. If {@code false}, colors will be in linear RGB BT.709.
-   * @throws FrameProcessingException If a problem occurs while reading shader files.
-   */
   public BitmapOverlayProcessor(Context context, boolean useHdr) {
     super(useHdr);
     checkArgument(!useHdr, "BitmapOverlayProcessor does not support HDR colors.");
