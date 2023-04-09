@@ -16,7 +16,6 @@ import androidx.annotation.VisibleForTesting;
 import com.frank.videoedit.effect.GlEffectsFrameProcessor;
 import com.frank.videoedit.listener.DebugViewProvider;
 import com.frank.videoedit.listener.FrameProcessor;
-import com.frank.videoedit.listener.GlEffect;
 import com.frank.videoedit.transform.clock.Clock;
 import com.frank.videoedit.transform.entity.ListenerSet;
 import com.frank.videoedit.transform.entity.MediaItem;
@@ -27,6 +26,7 @@ import com.frank.videoedit.transform.util.MediaUtil;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.common.collect.ImmutableList;
 
 import java.io.File;
@@ -57,7 +57,7 @@ public final class Transformer {
     private final Context context;
 
     private TransformationRequest transformationRequest;
-    private ImmutableList<GlEffect> videoEffects;
+    private ImmutableList<Effect> videoEffects;
     private boolean removeAudio;
     private boolean removeVideo;
     private ListenerSet<Listener> listeners;
@@ -111,7 +111,7 @@ public final class Transformer {
       return this;
     }
 
-    public Builder setVideoEffects(List<GlEffect> effects) {
+    public Builder setVideoEffects(List<Effect> effects) {
       this.videoEffects = ImmutableList.copyOf(effects);
       return this;
     }
@@ -272,7 +272,7 @@ public final class Transformer {
 
   private final Context context;
   private final TransformationRequest transformationRequest;
-  private final ImmutableList<GlEffect> videoEffects;
+  private final ImmutableList<Effect> videoEffects;
   private final boolean removeAudio;
   private final boolean removeVideo;
   private final ListenerSet<Listener> listeners;
@@ -293,7 +293,7 @@ public final class Transformer {
   private Transformer(
       Context context,
       TransformationRequest transformationRequest,
-      ImmutableList<GlEffect> videoEffects,
+      ImmutableList<Effect> videoEffects,
       boolean removeAudio,
       boolean removeVideo,
       ListenerSet<Listener> listeners,

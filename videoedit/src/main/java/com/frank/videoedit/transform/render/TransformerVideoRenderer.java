@@ -5,7 +5,6 @@ import android.content.Context;
 
 import com.frank.videoedit.listener.DebugViewProvider;
 import com.frank.videoedit.listener.FrameProcessor;
-import com.frank.videoedit.listener.GlEffect;
 //import com.frank.videoedit.transform.entity.DecoderInputBuffer;
 import com.frank.videoedit.transform.FallbackListener;
 import com.frank.videoedit.transform.Format;
@@ -21,6 +20,7 @@ import com.frank.videoedit.transform.util.MediaUtil;
 import com.google.android.exoplayer2.FormatHolder;
 import com.google.android.exoplayer2.source.SampleStream;
 import com.google.android.exoplayer2.decoder.DecoderInputBuffer;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.common.collect.ImmutableList;
 
 public final class TransformerVideoRenderer extends TransformerBaseRenderer {
@@ -29,7 +29,7 @@ public final class TransformerVideoRenderer extends TransformerBaseRenderer {
 
   private final Context context;
   private final boolean clippingStartsAtKeyFrame;
-  private final ImmutableList<GlEffect> effects;
+  private final ImmutableList<Effect> effects;
   private final FrameProcessor.Factory frameProcessorFactory;
   private final Codec.EncoderFactory encoderFactory;
   private final Codec.DecoderFactory decoderFactory;
@@ -45,7 +45,7 @@ public final class TransformerVideoRenderer extends TransformerBaseRenderer {
       TransformerMediaClock mediaClock,
       TransformationRequest transformationRequest,
       boolean clippingStartsAtKeyFrame,
-      ImmutableList<GlEffect> effects,
+      ImmutableList<Effect> effects,
       FrameProcessor.Factory frameProcessorFactory,
       Codec.EncoderFactory encoderFactory,
       Codec.DecoderFactory decoderFactory,

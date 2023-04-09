@@ -7,6 +7,7 @@ import android.view.Surface;
 import com.frank.videoedit.entity.ColorInfo;
 import com.frank.videoedit.entity.FrameInfo;
 import com.frank.videoedit.entity.SurfaceInfo;
+import com.google.android.exoplayer2.util.Effect;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface FrameProcessor {
     FrameProcessor create(
         Context context,
         Listener listener,
-        List<GlEffect> effects,
+        List<Effect> effects,
         DebugViewProvider debugViewProvider,
         ColorInfo colorInfo,
         boolean releaseFramesAutomatically);

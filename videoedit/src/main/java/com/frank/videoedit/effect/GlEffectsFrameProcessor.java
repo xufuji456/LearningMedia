@@ -21,6 +21,7 @@ import com.frank.videoedit.listener.GlMatrixTransform;
 import com.frank.videoedit.listener.GlTextureProcessor;
 
 import com.frank.videoedit.util.GlUtil;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
     public GlEffectsFrameProcessor create(
         Context context,
         FrameProcessor.Listener listener,
-        List<GlEffect> effects,
+        List<Effect> effects,
         DebugViewProvider debugViewProvider,
         ColorInfo colorInfo,
         boolean releaseFramesAutomatically) {
@@ -72,7 +73,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
   private static GlEffectsFrameProcessor createOpenGlObjectsAndFrameProcessor(
       Context context,
       FrameProcessor.Listener listener,
-      List<GlEffect> effects,
+      List<Effect> effects,
       DebugViewProvider debugViewProvider,
       ColorInfo colorInfo,
       boolean releaseFramesAutomatically,
@@ -110,7 +111,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
 
   private static ImmutableList<GlTextureProcessor> getGlTextureProcessorsForGlEffects(
       Context context,
-      List<GlEffect> effects,
+      List<Effect> effects,
       EGLDisplay eglDisplay,
       EGLContext eglContext,
       FrameProcessor.Listener listener,
@@ -124,7 +125,7 @@ public final class GlEffectsFrameProcessor implements FrameProcessor {
 
     boolean sampleFromExternalTexture = true;
     for (int i = 0; i < effects.size(); i++) {
-      GlEffect glEffect = effects.get(i);
+      GlEffect glEffect = (GlEffect) effects.get(i);
       if (glEffect instanceof GlMatrixTransform) {
         matrixTransformationListBuilder.add((GlMatrixTransform) glEffect);
         continue;

@@ -41,6 +41,7 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.util.DebugTextViewHelper;
 //import com.google.android.exoplayer2.util.DebugViewProvider;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.android.exoplayer2.util.Log;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.material.card.MaterialCardView;
@@ -267,14 +268,14 @@ public final class TransformerActivity extends AppCompatActivity {
     return file;
   }
 
-  private ImmutableList<GlEffect> createVideoEffectsListFromBundle(Bundle bundle) {
+  private ImmutableList<Effect> createVideoEffectsListFromBundle(Bundle bundle) {
     @Nullable
     boolean[] selectedEffects =
         bundle.getBooleanArray(EditActivity.DEMO_EFFECTS_SELECTIONS);
     if (selectedEffects == null) {
       return ImmutableList.of();
     }
-    ImmutableList.Builder<GlEffect> effects = new ImmutableList.Builder<>();
+    ImmutableList.Builder<Effect> effects = new ImmutableList.Builder<>();
     if (selectedEffects[0]) {
       effects.add(
           new HslAdjustment.Builder()

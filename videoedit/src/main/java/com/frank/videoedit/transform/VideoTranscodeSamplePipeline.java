@@ -17,12 +17,12 @@ import com.frank.videoedit.entity.FrameInfo;
 import com.frank.videoedit.entity.SurfaceInfo;
 import com.frank.videoedit.listener.DebugViewProvider;
 import com.frank.videoedit.listener.FrameProcessor;
-import com.frank.videoedit.listener.GlEffect;
 //import com.frank.videoedit.transform.entity.DecoderInputBuffer;
 import com.frank.videoedit.transform.impl.Codec;
 
 import com.frank.videoedit.transform.util.EncoderUtil;
 import com.frank.videoedit.transform.util.MediaUtil;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.common.collect.ImmutableList;
 
 import org.checkerframework.dataflow.qual.Pure;
@@ -55,7 +55,7 @@ public final class VideoTranscodeSamplePipeline extends BaseSamplePipeline {
       long streamOffsetUs,
       long streamStartPositionUs,
       TransformationRequest transformationRequest,
-      ImmutableList<GlEffect> effects,
+      ImmutableList<Effect> effects,
       FrameProcessor.Factory frameProcessorFactory,
       Codec.DecoderFactory decoderFactory,
       Codec.EncoderFactory encoderFactory,
@@ -106,8 +106,8 @@ public final class VideoTranscodeSamplePipeline extends BaseSamplePipeline {
     int decodedHeight =
         (inputFormat.rotationDegrees % 180 == 0) ? inputFormat.height : inputFormat.width;
 
-    ImmutableList.Builder<GlEffect> effectsListBuilder =
-        new ImmutableList.Builder<GlEffect>().addAll(effects);
+    ImmutableList.Builder<Effect> effectsListBuilder =
+        new ImmutableList.Builder<Effect>().addAll(effects);
     if (transformationRequest.scaleX != 1f
         || transformationRequest.scaleY != 1f
         || transformationRequest.rotationDegrees != 0f) {

@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 
 import com.frank.videoedit.listener.DebugViewProvider;
 import com.frank.videoedit.listener.FrameProcessor;
-import com.frank.videoedit.listener.GlEffect;
 import com.frank.videoedit.transform.clock.Clock;
 import com.frank.videoedit.transform.entity.MediaItem;
 import com.frank.videoedit.transform.impl.Codec;
@@ -40,6 +39,7 @@ import com.google.android.exoplayer2.metadata.MetadataOutput;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.text.TextOutput;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.util.Effect;
 import com.google.android.exoplayer2.video.VideoRendererEventListener;
 import com.google.common.collect.ImmutableList;
 
@@ -54,7 +54,7 @@ final class ExoPlayerAssetLoader {
 
   private final Context context;
   private final TransformationRequest transformationRequest;
-  private final ImmutableList<GlEffect> videoEffects;
+  private final ImmutableList<Effect> videoEffects;
   private final boolean removeAudio;
   private final boolean removeVideo;
   private final MediaSource.Factory mediaSourceFactory;
@@ -72,7 +72,7 @@ final class ExoPlayerAssetLoader {
   public ExoPlayerAssetLoader(
       Context context,
       TransformationRequest transformationRequest,
-      ImmutableList<GlEffect> videoEffects,
+      ImmutableList<Effect> videoEffects,
       boolean removeAudio,
       boolean removeVideo,
       MediaSource.Factory mediaSourceFactory,
@@ -182,7 +182,7 @@ final class ExoPlayerAssetLoader {
     private final boolean removeVideo;
     private final TransformationRequest transformationRequest;
     private final boolean clippingStartsAtKeyFrame;
-    private final ImmutableList<GlEffect> videoEffects;
+    private final ImmutableList<Effect> videoEffects;
     private final FrameProcessor.Factory frameProcessorFactory;
     private final Codec.EncoderFactory encoderFactory;
     private final Codec.DecoderFactory decoderFactory;
@@ -197,7 +197,7 @@ final class ExoPlayerAssetLoader {
         boolean removeVideo,
         TransformationRequest transformationRequest,
         boolean clippingStartsAtKeyFrame,
-        ImmutableList<GlEffect> videoEffects,
+        ImmutableList<Effect> videoEffects,
         FrameProcessor.Factory frameProcessorFactory,
         Codec.EncoderFactory encoderFactory,
         Codec.DecoderFactory decoderFactory,
